@@ -9,7 +9,11 @@ public class MemberApp {
 
     public static void main(String[] args) {
         //순수 자바로 만든 애플리케이션
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+
+//        MemberService memberService = new MemberServiceImpl();
+        MemberService memberService = appConfig.memberService();
+
         Member member = new Member(1L, "memberA", Grade.VIP);
 
         memberService.join(member);
