@@ -9,26 +9,32 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+// 스프링 전환 1) @Configuration
+@Configuration
 public class AppConfig {
 
     // 생성자 주입
+    @Bean
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
     }
 
     // 만약 MemberRepository에 변경이 필요하면? 밑의 return 부분만 바꿔주면 된다!
-    private MemberRepository memberRepository() {
+    @Bean
+    public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
+    @Bean
     public OrderService orderService(){
-        return new OrderServiceImpl(
-                memberRepository(), discountPolicy()
-        );
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
-
-    private DiscountPolicy discountPolicy() {
+    
+    @Bean
+    public DiscountPolicy discountPolicy() {
         return new RateDiscountPolicy();
     }
 }
