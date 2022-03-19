@@ -18,4 +18,9 @@ public class MemberServiceImpl implements MemberService{
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId);
     }
+
+    // 싱글톤 깨지는 여부 테스트 용도
+    public MemberRepository getMemberRepository(){
+        return memberRepository;
+    }
 }
