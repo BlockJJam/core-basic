@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -15,11 +18,31 @@ public class OrderServiceImpl implements OrderService {
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 //    private DiscountPolicy discountPolicy; // 이렇게만 선언해도 이용가능하도록 할 순 없을까?
 
-    // 생성자 주입방식
+    // 생성자 주입 방식에 쓰이는 필드
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    // 필드 주입 방식
+//    @Autowired private MemberRepository memberRepository;
+//    @Autowired private DiscountPolicy discountPolicy;
+
+    // Setter 주입 방식 (field에 final 키워드 제거 필요)
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        System.out.println("memberRepository = " + memberRepository);
+//        this.memberRepository = memberRepository;
+//    }
+//
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        System.out.println("discountPolicy = " + discountPolicy);
+//        this.discountPolicy = discountPolicy;
+//    }
+
+    // 생성자 주입방식
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("생성자 memberRepository = " + memberRepository);
+        System.out.println("생성자 discountPolicy = " + discountPolicy);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
