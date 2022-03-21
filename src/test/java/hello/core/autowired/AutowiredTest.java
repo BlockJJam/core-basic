@@ -33,7 +33,7 @@ public class AutowiredTest {
             System.out.println("noBean2 = " + noBean2);
         }
 
-        // 호출은 되지만, 의존관계 주입 객체에 Optional.empty가 들어간다
+        // 호출은 되지만, 의존관계 주입 객체에 
         @Autowired
         public void setNoBean3(Optional<Member> noBean3){
             System.out.println("noBean3 = " + noBean3);

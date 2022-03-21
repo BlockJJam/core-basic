@@ -1,15 +1,19 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -22,6 +26,9 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    // @Autowired 로 여러 빈 중에 필드명과 같은 빈을 가져오려고 하기 위해서
+//    private  DiscountPolicy fixDiscountPolicy;
+ /*
     // 필드 주입 방식
 //    @Autowired private MemberRepository memberRepository;
 //    @Autowired private DiscountPolicy discountPolicy;
@@ -37,14 +44,12 @@ public class OrderServiceImpl implements OrderService {
 //    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
 //        System.out.println("discountPolicy = " + discountPolicy);
 //        this.discountPolicy = discountPolicy;
-//    }
+//    }*/
 
     // 생성자 주입방식
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("생성자 memberRepository = " + memberRepository);
-        System.out.println("생성자 discountPolicy = " + discountPolicy);
+    public OrderServiceImpl(MemberRepository memberRepository,/*@Qualifier("fixDiscountPolicy") @MainDiscountPolicy*/ DiscountPolicy discountPolicy) { //DiscountPolicy fixDiscountPolicy
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy = discountPolicy; // fixDiscountPolicy
     }
 
     @Override
