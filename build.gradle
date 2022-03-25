@@ -20,12 +20,16 @@ configurations{
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	// javax Provider DL 기능 의존성 추가
+	implementation 'javax.inject:javax.inject:1'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
